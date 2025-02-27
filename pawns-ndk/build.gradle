@@ -32,13 +32,15 @@ android {
                 // Sets a flag to enable format macro constants for the C compiler.
                 cFlags '-D__STDC_FORMAT_MACROS'
                 // Sets optional flags for the C++ compiler.
-                cppFlags '-fexceptions', '-frtti'
+                cppFlags '-fexceptions',
+                        '-frtti',
+                        '-Wl,--build-id',
+                        '-g'
             }
         }
-
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-            debugSymbolLevel 'SYMBOL_TABLE'
+            debugSymbolLevel 'FULL'
         }
     }
 
@@ -81,6 +83,7 @@ android {
     }
 
     packagingOptions {
+        doNotStrip '**.so'
         jniLibs {
             useLegacyPackaging true
             keepDebugSymbols.add("**/*.so")

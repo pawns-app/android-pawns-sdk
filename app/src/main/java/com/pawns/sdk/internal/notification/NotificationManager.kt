@@ -1,7 +1,5 @@
 package com.pawns.sdk.internal.notification
 
-import android.app.ActivityOptions
-import android.app.ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
