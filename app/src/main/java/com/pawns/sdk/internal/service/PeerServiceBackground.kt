@@ -65,7 +65,7 @@ internal class PeerServiceBackground : Service() {
             ServiceAction.STOP_PAWNS_SERVICE.name -> stopService(startId)
             else -> PawnsLogger.e(TAG, "Unknown action received, please use ServiceAction")
         }
-        return super.onStartCommand(intent, flags, startId)
+        return START_NOT_STICKY
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -80,6 +80,7 @@ internal class PeerServiceBackground : Service() {
     override fun onDestroy() {
         emitState(ServiceState.Off)
         coreScope.launch { PawnsCore.StopMainRoutine() }
+        PawnsLogger.e(TAG, "Was gracefully destroyed and stopped")
         super.onDestroy()
     }
 
