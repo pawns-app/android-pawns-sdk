@@ -79,12 +79,9 @@ internal class PeerServiceForeground : Service() {
         runCatching {
             val foregroundServiceType = when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
-                        PermissionUtil.hasPermissionInManifest(
-                            this, Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC
-                        ) &&
-                        !PermissionUtil.hasPermissionInManifest(
-                            this, Manifest.permission.FOREGROUND_SERVICE_SPECIAL_USE
-                        ) -> ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+                        PermissionUtil.hasPermissionInManifest(this, Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC) &&
+                        !PermissionUtil.hasPermissionInManifest(this, Manifest.permission.FOREGROUND_SERVICE_SPECIAL_USE)
+                            -> ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
 
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
                 else -> 0
@@ -149,6 +146,11 @@ internal class PeerServiceForeground : Service() {
         coreScope.launch { PawnsCore.StopMainRoutine() }
         PawnsLogger.e(TAG, "Was gracefully destroyed and stopped")
         super.onDestroy()
+    }
+
+    override fun onTimeout(startId: Int, fgsType: Int) {
+        super.onTimeout(startId, fgsType)
+        stopService(startId = startId)
     }
 
     // Responsible for starting PeerService
