@@ -9,7 +9,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 groupId = 'com.pawns.sdk'
-                version = '1.0.5'
+                version = '1.0.5.2'
                 from components.release
             }
         }
