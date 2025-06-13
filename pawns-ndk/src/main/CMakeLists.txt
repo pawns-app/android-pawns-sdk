@@ -25,6 +25,8 @@ add_library(
         ${CMAKE_CURRENT_SOURCE_DIR}/cpp/native-lib.cpp  # Use the correct source file here
 )
 
+target_link_options(pawns_ndk PRIVATE "-Wl,-z,max-page-size=16384")
+
 # Include architecture-specific headers
 if (${ANDROID_ABI} STREQUAL "arm64-v8a")
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/cpp/include/arm64-v8a)

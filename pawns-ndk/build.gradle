@@ -9,7 +9,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 groupId = 'com.pawns.sdk'
-                version = '1.0.5'
+                version = '1.0.6'
                 from components.release
             }
         }
@@ -28,7 +28,8 @@ android {
         externalNativeBuild {
             cmake {
                 // Passes optional arguments to CMake.
-                arguments '-DANDROID_ARM_NEON=TRUE', '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_shared', '-DANDROID_SANITIZE=hwaddress'
+                arguments '-DANDROID_ARM_NEON=TRUE', '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_shared', '-DANDROID_SANITIZE=hwaddress', "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+
                 // Sets a flag to enable format macro constants for the C compiler.
                 cFlags '-D__STDC_FORMAT_MACROS'
                 // Sets optional flags for the C++ compiler.
