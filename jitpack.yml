@@ -1,2 +1,18 @@
+# jitpack.yml
 jdk:
-  - openjdk17
+  - openjdk17  # AGP 8+ requires JDK 17 on CI
+
+before_install:
+  - export ANDROID_SDK_ROOT="${ANDROID_HOME:-/opt/android-sdk-linux}"
+  - export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH"
+  # Accept licenses non-interactively (safe for CI):
+  - yes | sdkmanager --licenses
+  # Install the exact NDK you request in Gradle:
+  - sdkmanager --install "ndk;28.0.12433566"
+  # (Optional) If you use CMake, uncomment and match your Gradle cmake version:
+  # - sdkmanager --install "cmake;3.22.1"
+
+install:
+  # JitPack runs publishToMavenLocal for maven-publish projects;
+  # we run it explicitly to be clear.
+  - ./gradlew -S -i clean build publishToMavenLocal -x lint -x test
