@@ -47,7 +47,4 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
     implementation "androidx.core:core-ktx:1.16.0"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.2'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
