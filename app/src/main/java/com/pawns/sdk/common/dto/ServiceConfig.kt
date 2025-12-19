@@ -12,11 +12,13 @@ import androidx.annotation.StringRes
  * @param smallIcon drawable resource for notification when service is running.
  * @param notificationPriority sets priority for service notification channel and notification itself
  * @param launcherIntent intent passed to pendingIntent of notification, default value is null that translates to application's launcher activity
+ * @param isBatteryOptimisationEnabled turns on or off battery optimisation to save device battery when it is low.
  */
 public data class ServiceConfig(
     @StringRes val title: Int? = null,
     @StringRes val body: Int? = null,
     @DrawableRes val smallIcon: Int? = null,
     val notificationPriority: ServiceNotificationPriority = ServiceNotificationPriority.DEFAULT,
-    val launcherIntent: Intent? = null
+    val launcherIntent: Intent? = null,
+    val isBatteryOptimisationEnabled: Boolean = true
 )
