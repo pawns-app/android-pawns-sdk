@@ -1,0 +1,4 @@
+<resources>
+    <style name="PawnsSdkConsentTheme"
+        parent="Theme.AppCompat.DayNight.NoActionBar"/>
+</resources>

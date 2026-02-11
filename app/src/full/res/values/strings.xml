@@ -1,0 +1,34 @@
+<resources>
+    <string name="sdk_consent_title">Pawns Internet Sharing — Optional Consent</string>
+    <string name="sdk_consent_intro"><![CDATA[
+This app includes an optional feature provided by <a href="https://pawns.app/">Pawns.app</a>. If you choose <b>Consent</b>, Pawns.app may use a portion of your internet connection on this device to route internet traffic for Pawns.app and its clients.
+]]></string>
+    <string name="sdk_consent_section_what_title">What enabling this means</string>
+    <string name="sdk_consent_section_what_subtitle">If you consent:</string>
+    <string name="sdk_consent_b1">• Your device becomes a gateway. Pawns.app may send and receive internet traffic through your device and internet connection.</string>
+    <string name="sdk_consent_b2">• Pawns.app may process your IP address, approximate location (derived from IP), and device/network technical data to operate, manage, and secure this feature.</string>
+    <string name="sdk_consent_b3">• This feature may use data, battery, CPU, and network resources, and may affect internet performance.</string>
+    <string name="sdk_consent_b4">• Do not enable this feature if you are on a restricted network, a metered plan, or if your network/provider rules do not allow this type of use.</string>
+    <string name="sdk_consent_b5">• Only enable Pawns Internet Sharing if you are of legal age in your country and are authorized to use this device and internet connection (including under your ISP/mobile plan and network rules).</string>
+    <string name="sdk_consent_b6"><![CDATA[
+• Pawns.app may share your IP address and approximate location (derived from IP) with its clients so they can access and use the shared traffic, as described in the <a href="https://pawns.app/privacy-policy/">Privacy Policy</a>.
+]]></string>
+    <string name="sdk_consent_section_no_impact_title">No impact on app access</string>
+    <string name="sdk_consent_section_no_impact_body">This feature is <b>not required</b> to use this app. If you select <b>Do not consent</b>, internet sharing will remain <b>disabled</b> and you can continue using the app normally.</string>
+    <string name="sdk_consent_section_withdraw_title">Withdrawing consent</string>
+    <string name="sdk_consent_section_withdraw_body">You may withdraw your consent at any time. The method to withdraw or disable this feature is provided by the owner of this app (not by Pawns.app)</string>
+    <string name="sdk_consent_section_info_title">Internet sharing (Pawns.app)</string>
+    <string name="sdk_consent_section_info_body"><![CDATA[
+<b>Responsibility notice:</b> The app owner is responsible for its app (including how this feature is presented, enabled/disabled, and supported), and your use of this app is governed by the app owner\'s terms and policies. When enabled, <b>the internet sharing functionality</b> is operated by Pawns.app as described above.
+]]></string>
+    <string name="sdk_consent_links_intro">These links are provided for general information about Pawns.app internet sharing functionality:</string>
+    <string name="sdk_consent_links_1"><![CDATA[
+• <b>Pawns Terms of Service:</b> <a href="https://pawns.app/terms-of-use/">https://pawns.app/terms-of-use</a>
+]]></string>
+    <string name="sdk_consent_links_2"><![CDATA[
+• <b>Pawns Privacy Policy:</b> <a href="https://pawns.app/privacy-policy/">https://pawns.app/privacy-policy</a>
+]]></string>
+    <string name="sdk_consent_confirm">By selecting <b>Consent</b>, you confirm you have read and understood the information above and you voluntarily agree to enable Pawns Internet Sharing on this device.</string>
+    <string name="sdk_consent_accept">Consent</string>
+    <string name="sdk_consent_decline">Do not consent</string>
+</resources>
