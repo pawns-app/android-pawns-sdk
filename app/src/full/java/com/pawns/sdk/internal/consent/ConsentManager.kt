@@ -21,22 +21,9 @@ internal class ConsentManager(private val context: Context) {
         return prefs.getBoolean(KEY_CONSENT_GIVEN, false)
     }
 
-    /**
-     * True if user has made a choice (accepted or denied).
-     */
-    fun isConsentDecided(): Boolean {
-        return prefs.contains(KEY_CONSENT_GIVEN)
-    }
-
     fun setConsentGiven(given: Boolean) {
         prefs.edit {
             putBoolean(KEY_CONSENT_GIVEN, given)
-        }
-    }
-
-    fun clearConsent() {
-        prefs.edit {
-            remove(KEY_CONSENT_GIVEN)
         }
     }
 
