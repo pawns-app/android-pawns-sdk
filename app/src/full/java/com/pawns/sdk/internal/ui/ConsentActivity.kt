@@ -1,4 +1,3 @@
-// Update ConsentActivity to render HTML for the TextViews that contain <a> / <b>
 package com.pawns.sdk.internal.ui
 
 import android.app.Activity
