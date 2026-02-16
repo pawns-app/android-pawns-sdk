@@ -1,6 +1,7 @@
 package com.pawns.sdk.common.sdk
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import com.pawns.ndk.PawnsCore
 import com.pawns.sdk.common.dto.ServiceConfig
@@ -8,6 +9,7 @@ import com.pawns.sdk.common.dto.ServiceNotification
 import com.pawns.sdk.common.dto.ServiceState
 import com.pawns.sdk.common.dto.ServiceType
 import com.pawns.sdk.common.listener.PawnsServiceListener
+import com.pawns.sdk.internal.consent.ConsentManager
 import com.pawns.sdk.internal.dto.ServiceAction
 import com.pawns.sdk.internal.logger.PawnsLogger
 import com.pawns.sdk.internal.provider.DependencyProvider
@@ -123,12 +125,14 @@ public class Pawns private constructor(
         }
     }
 
+    internal lateinit var appContext: Context
     internal var dependencyProvider: DependencyProvider? = null
     internal var serviceListener: PawnsServiceListener? = null
     internal val _serviceState: MutableStateFlow<ServiceState> = MutableStateFlow(ServiceState.Off)
     internal val serviceState: StateFlow<ServiceState> = _serviceState
 
     private fun init(context: Context, serviceType: ServiceType) {
+        appContext = context.applicationContext
         val deviceId = DeviceIdHelper.id(context)
         val deviceName = SystemUtils.getDeviceNameAndOsVersion()
         if (PawnsCore.isNdkLoaded) {
@@ -146,6 +150,45 @@ public class Pawns private constructor(
             dependencyProvider?.notificationManager?.setExternalNotification(serviceNotification)
             return
         }
+    }
+
+    /**
+     * Allows setting consent given, when user explicitly denies later on in application flow
+     * or when custom consent screen is used and this will be used for setting consent.
+     */
+    public fun setConsentGiven(isGiven: Boolean) {
+        if (!::appContext.isInitialized) {
+            PawnsLogger.e(TAG, "Instance is not initialised. ApplicationContext not available")
+            return
+        }
+        if (!isGiven) {
+            stopSharing(appContext)
+        }
+        ConsentManager(appContext).setConsentGiven(isGiven)
+    }
+
+    /**
+     * Returns true if consent has been given.
+     */
+    public fun isConsentGiven(): Boolean {
+        if (!::appContext.isInitialized) {
+            PawnsLogger.e(TAG, "Instance is not initialised. ApplicationContext not available")
+            return false
+        }
+        return ConsentManager(appContext).isConsentGiven()
+    }
+
+    /**
+     * Returns intent to show consent screen.
+     * @throws RuntimeException if application context is not provided by init method
+     */
+    @Throws(RuntimeException::class)
+    public fun getConsentIntent(): Intent {
+        if (!::appContext.isInitialized) {
+            PawnsLogger.e(TAG, "Instance is not initialised. ApplicationContext not available")
+            throw RuntimeException("ApplicationContext not available")
+        }
+        return ConsentManager(appContext).getConsentIntent(appContext)
     }
 
     /**
@@ -199,6 +242,10 @@ public class Pawns private constructor(
     public fun startSharing(context: Context) {
         if (!isInitialised) {
             PawnsLogger.e(TAG, "Instance is not initialised, make sure to initialise before using startSharing")
+            return
+        }
+        if (!ConsentManager(appContext).isConsentGiven()) {
+            PawnsLogger.e(TAG, "User's consent is not given, make sure to give consent before using startSharing")
             return
         }
         if (!SystemUtils.isServiceRunning(context)) {

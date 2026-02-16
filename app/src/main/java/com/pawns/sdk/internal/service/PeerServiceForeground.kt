@@ -185,7 +185,7 @@ internal class PeerServiceForeground : Service() {
                             plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS
 
                     when {
-                        batteryLevel < 20 && !isCharging -> {
+                        batteryLevel < 20 && !isCharging && Pawns.getInstance().serviceConfig.isBatteryOptimisationEnabled -> {
                             stopSharing(ServiceState.Launched.LowBattery)
                         }
 
